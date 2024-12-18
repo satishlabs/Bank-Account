@@ -12,5 +12,5 @@ public interface AccountService {
     public Account createAccount(Account account);
     public Account updateAccount(Integer id, Account account);
     public void deleteAccount(Integer id);
-    public Page<Account> getAllAccounts(Pageable pageable);
+    public Page<Account> getAccounts(Pageable pageable);
 }

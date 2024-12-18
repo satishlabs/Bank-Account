@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/accounts")
-@CrossOrigin(origins = "")
+@RequestMapping("/api/accounts")
+@CrossOrigin(origins = "http://localhost:3000/")
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -43,9 +43,9 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
-    public ResponseEntity<Page<Account>> getAllAccounts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    @GetMapping("/pageWise")
+    public ResponseEntity<Page<Account>> getAccounts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
        Pageable pageable = PageRequest.of(page,size);
-        return ResponseEntity.ok(accountService.getAllAccounts(pageable));
+        return ResponseEntity.ok(accountService.getAccounts(pageable));
     }
 }
