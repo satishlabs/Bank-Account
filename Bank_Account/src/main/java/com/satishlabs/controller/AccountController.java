@@ -3,6 +3,9 @@ package com.satishlabs.controller;
 import com.satishlabs.entity.Account;
 import com.satishlabs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +41,11 @@ public class AccountController {
     public ResponseEntity<Void> deleteAccount(@PathVariable Integer id) {
         accountService.deleteAccount(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<Account>> getAllAccounts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+       Pageable pageable = PageRequest.of(page,size);
+        return ResponseEntity.ok(accountService.getAllAccounts(pageable));
     }
 }

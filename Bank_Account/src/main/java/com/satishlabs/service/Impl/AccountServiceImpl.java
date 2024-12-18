@@ -4,6 +4,8 @@ import com.satishlabs.entity.Account;
 import com.satishlabs.repository.AccountRepository;
 import com.satishlabs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,5 +42,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccount(Integer id) {
         accountRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Account> getAllAccounts(Pageable pageable) {
+        return accountRepository.findAll(pageable);
     }
 }
